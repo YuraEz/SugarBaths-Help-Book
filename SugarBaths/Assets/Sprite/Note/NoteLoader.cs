@@ -42,19 +42,31 @@ public class NoteLoader : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
+            if (PlayerPrefs.GetInt($"deleted{i}", 0) == 1) continue;
+            else
+            {
+
+           
+
             NoteContainer newNote = Instantiate(notePrefab, notesParent.position, Quaternion.identity, notesParent.transform);
          
             newNote.transform.localPosition = notesParent.localPosition;
 
             newNote.namef.text = PlayerPrefs.GetString($"name{i}");
-            newNote.rate.text = $"Finnish bathhouse / Rating {PlayerPrefs.GetInt($"stars{i}")}/10";
+            newNote.rate.text = $"{PlayerPrefs.GetString($"hz{i}")} / Rating {PlayerPrefs.GetInt($"stars{i}")}/10";
             newNote.adress.text = PlayerPrefs.GetString($"adress{i}");
             newNote.price.text = $"{PlayerPrefs.GetString($"price{i}")} $";
             newNote.desc.text = PlayerPrefs.GetString($"desc{i}");
          //   newNote.namef.text = PlayerPrefs.GetString($"name{i}");
             newNote.OnChangeStars(PlayerPrefs.GetInt($"stars{i}"));
+            newNote.index = i;
             // Optionally, customize the newNote instance here
             notes.Add(newNote.gameObject);
+            }
+
+
+
+
         }
     }
 }

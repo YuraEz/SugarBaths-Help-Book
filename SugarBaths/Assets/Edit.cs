@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Nore : MonoBehaviour
+public class Edit : MonoBehaviour
 {
     [SerializeField] private TMP_InputField noteName;
     [SerializeField] private TMP_Dropdown idk;
@@ -18,15 +18,24 @@ public class Nore : MonoBehaviour
 
     private int starsAmount;
 
-    private void Start()
+    private void OnEnable()
     {
+        int noteIndex = PlayerPrefs.GetInt("edit", 0);
+
+        noteName.text = PlayerPrefs.GetString($"name{noteIndex}");
+     //   idk.options[idk.value].text = PlayerPrefs.GetString($"stars{noteIndex}");
+        adress.text = PlayerPrefs.GetString($"adress{noteIndex}");
+        price.text = PlayerPrefs.GetString($"price{noteIndex}");
+        desc.text = PlayerPrefs.GetString($"desc{noteIndex}");
+        OnChangeStars(PlayerPrefs.GetInt($"stars{noteIndex}"));
+
         foreach (Star star in stars)
         {
             star.onChange += OnChangeStars;
         }
 
-        add.onClick.AddListener(()=>{
-            int noteIndex = PlayerPrefs.GetInt("noteId", 0);
+        add.onClick.AddListener(() => {
+          //  int noteIndex = PlayerPrefs.GetInt("noteId", 0);
             PlayerPrefs.SetString($"name{noteIndex}", noteName.text);
             PlayerPrefs.SetString($"adress{noteIndex}", adress.text);
             PlayerPrefs.SetString($"price{noteIndex}", price.text);
@@ -37,17 +46,16 @@ public class Nore : MonoBehaviour
             PlayerPrefs.SetString($"hz{noteIndex}", idk.options[idk.value].text);
 
 
-            noteName.text = "";
-            idk.itemText.text = "Finnish bathhouse";
-            adress.text = string.Empty;
-            price.text = string.Empty;
-            desc.text = string.Empty;
+            //   noteName.text = "";
+            //  idk.itemText.text = "Finnish bathhouse";
+            //  adress.text = string.Empty;
+            //  price.text = string.Empty;
+            //  desc.text = string.Empty;
 
-            ResetStars();
+            //    ResetStars();
 
 
-            PlayerPrefs.SetInt("noteId", noteIndex+1);
-
+            //    PlayerPrefs.SetInt("noteId", noteIndex + 1);
             ServiceLocator.GetService<UIManager>().ChangeScreen("selection1");
             ServiceLocator.GetService<UIManager>().ChangeScreen("selection31");
         });

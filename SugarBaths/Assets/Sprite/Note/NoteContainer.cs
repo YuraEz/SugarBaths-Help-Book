@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NoteContainer : MonoBehaviour
 {
@@ -11,6 +12,26 @@ public class NoteContainer : MonoBehaviour
     public TextMeshProUGUI price;
     public TextMeshProUGUI desc;
     public List<Star> stars;
+
+    [Space]
+    public int index;
+
+    [Space]
+    public GameObject panel;
+    public Button btn1;
+    public Button editBtn;
+    //public Button delete;
+
+    private void Start()
+    {
+        panel.SetActive(false);
+
+        btn1.onClick.AddListener(() =>
+        {
+            panel.SetActive(!panel.activeSelf);
+        });
+    }
+
 
     public void OnChangeStars(int amount)
     {

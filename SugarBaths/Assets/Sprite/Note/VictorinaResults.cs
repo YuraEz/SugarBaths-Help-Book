@@ -6,37 +6,48 @@ using UnityEngine.UI;
 public class VictorinaResults : MonoBehaviour
 {
     // Ссылка на родительский контейнер с Grid Layout Group
-    public Transform container;
+    //public Transform container;
+
+    public List<GameObject> results;
 
     void OnEnable()
     {
-        Shuffle();
+       // Shuffle();
+
+        foreach (GameObject obj in results)
+        {
+            obj.SetActive(false);
+        }
+
+        int index = Random.Range(0, results.Count);
+        results[index].SetActive(true);
+
     }
 
     // Метод для перемешивания изображений
     void Shuffle()
     {
-        // Получаем все дочерние объекты
-        List<Transform> children = new List<Transform>();
-        foreach (Transform child in container)
-        {
-            children.Add(child);
-        }
-
-        // Перемешиваем дочерние объекты
-        for (int i = 0; i < children.Count; i++)
-        {
-            Transform temp = children[i];
-            int randomIndex = Random.Range(0, children.Count);
-            children[i] = children[randomIndex];
-            children[randomIndex] = temp;
-        }
-
-        // Назначаем новый порядок дочерних объектов
-        for (int i = 0; i < children.Count; i++)
-        {
-            children[i].SetSiblingIndex(i);
-        }
+    //   // Получаем все дочерние объекты
+    //   List<Transform> children = new List<Transform>();
+    //   foreach (Transform child in container)
+    //   {
+    //       children.Add(child);
+    //   }
+    //
+    //   // Перемешиваем дочерние объекты
+    //   for (int i = 0; i < children.Count; i++)
+    //   {
+    //       Transform temp = children[i];
+    //       int randomIndex = Random.Range(0, children.Count);
+    //       children[i] = children[randomIndex];
+    //       children[randomIndex] = temp;
+    //   }
+    //
+    //   // Назначаем новый порядок дочерних объектов
+    //   for (int i = 0; i < children.Count; i++)
+    //   {
+    //       children[i].SetSiblingIndex(i);
+    //   }
 
         PlayerPrefs.SetInt("V1", 0);
         PlayerPrefs.SetInt("V2", 0);
