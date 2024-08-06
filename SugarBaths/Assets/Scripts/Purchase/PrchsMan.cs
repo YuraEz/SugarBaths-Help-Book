@@ -50,7 +50,10 @@ public class PrchsMan : MonoBehaviour, IDetailedStoreListener
 
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
         builder.AddProduct("premium", ProductType.NonConsumable);
-
+        builder.AddProduct("BeginnerSubscription", ProductType.NonConsumable);
+        builder.AddProduct("SilverSubscription", ProductType.NonConsumable);
+        builder.AddProduct("GoldenSubscription", ProductType.NonConsumable);
+        builder.AddProduct("PROSubscription", ProductType.NonConsumable);
 
         UnityPurchasing.Initialize(this, builder);
     }
@@ -79,6 +82,26 @@ public class PrchsMan : MonoBehaviour, IDetailedStoreListener
                 Debug.Log("premium successfully purchased!");
                 PokupkaScreenUI.Instance.ShowSuccess();
                 PlayerPrefs.SetInt("premium", 1);
+                break;
+            case "BeginnerSubscription":
+                Debug.Log("BeginnerSubscription successfully purchased!");
+                PokupkaScreenUI.Instance.ShowSuccess();
+                PlayerPrefs.SetInt("BeginnerSubscription", 1);
+                break;
+            case "SilverSubscription":
+                Debug.Log("SilverSubscription successfully purchased!");
+                PokupkaScreenUI.Instance.ShowSuccess();
+                PlayerPrefs.SetInt("SilverSubscription", 1);
+                break;
+            case "GoldenSubscription":
+                Debug.Log("GoldenSubscription successfully purchased!");
+                PokupkaScreenUI.Instance.ShowSuccess();
+                PlayerPrefs.SetInt("GoldenSubscription", 1);
+                break;
+            case "PROSubscription":
+                Debug.Log("PROSubscription successfully purchased!");
+                PokupkaScreenUI.Instance.ShowSuccess();
+                PlayerPrefs.SetInt("PROSubscription", 1);
                 break;
 
             default:
@@ -117,7 +140,10 @@ public class PrchsMan : MonoBehaviour, IDetailedStoreListener
 
                     //onMs?.Invoke(true);
                     PlayerPrefs.SetInt("premium", 1);
-
+                    PlayerPrefs.SetInt("BeginnerSubscription", 1);
+                    PlayerPrefs.SetInt("SilverSubscription", 1);
+                    PlayerPrefs.SetInt("GoldenSubscription", 1);
+                    PlayerPrefs.SetInt("PROSubscription", 1);
                 }
                 else
                 {
